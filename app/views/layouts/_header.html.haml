@@ -1,0 +1,18 @@
+.p-3
+  %h1
+    = link_to 'Lista zadań', root_path, class: "login-links"
+
+.flex-grow-1
+
+.flex.flex-column.float-end
+  .d-flex.px-2.pt-3
+    - if current_user
+      .d-block.text-end
+        = link_to current_user.email, edit_user_registration_path, class: 'login-links'
+        = button_to "Wyloguj się", destroy_user_session_path, method: :delete, class: 'login-links bg-transparent border-0'
+
+    - else
+      .d-block.text-end
+        = link_to "Zarejestruj się", new_user_registration_path, class: "login-links"
+        |
+        = link_to "Zaloguj", new_user_session_path, class: 'login-links'

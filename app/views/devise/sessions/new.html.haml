@@ -1,0 +1,20 @@
+.basic-view.rounded-4.p-3.mb-3
+  %h2 Logowanie
+
+  .row.d-flex.justify-content-center
+    .col-md-8.col-lg-6.col-xl-5.col-xxl-4.p-2
+      = simple_form_for(resource, as: resource_name, url: session_path(resource_name), ) do |f|
+        .form-inputs
+          = f.input :email,
+                      required: false,
+                      autofocus: true,
+                      input_html: { autocomplete: "email" }
+          = f.input :password,
+                      label: 'Hasło',
+                      required: false,
+                      input_html: { autocomplete: "current-password" }
+          = f.input :remember_me, label: 'Zapamiętaj mnie', as: :boolean if devise_mapping.rememberable?
+
+
+        .form-actions
+          = f.button :submit, 'Zaloguj się', data: { turbo: false }, class: 'btn btn-secondary float-end'

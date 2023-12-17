@@ -1,0 +1,42 @@
+!!!
+%html
+  %head
+    %title Todo
+    %meta{:name=>'viewport', :content=>'width=device-width,initial-scale=1'}
+    %meta{:name=>"turbo-visit-control", :content=>"reload"}
+    = csrf_meta_tags
+    = csp_meta_tag
+    %link{:rel=>'stylesheet', :href=>'https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css'}
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_importmap_tags
+    = turbo_page_requires_reload
+
+  %body
+    .modal{:tabindex=>'-1',
+        "data-controller"=>'modal',
+        "data-modal-target"=>'modal',
+        "data-action"=>'turbo:frame-load->modal#open turbo:submit-end->modal#close'}
+      .modal-dialog
+        .modal-content
+          = turbo_frame_tag "modal"
+
+    = render 'layouts/sidebar'
+
+    .flash
+      = render 'shared/flash'
+
+    %main.d-flex.flex-nowrap
+      .container
+        %header.d-flex.rounded-4.my-2
+          = render 'layouts/header'
+        = yield
+
+    %dialog#turbo-confirm
+      %form{:method=>'dialog'}
+        .dialog-header.p-2.px-3
+          %h2 Informacja
+        .dialog-content.m-3
+          %p
+          %div
+            %button.btn.btn-secondary.float-start.m-2{:value=>'cancel'}='Anuluj'
+            %button.btn.btn-danger.float-end.m-2{:value=>'confirm'}='Potwierdź'

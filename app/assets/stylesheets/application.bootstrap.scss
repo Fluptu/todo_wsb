@@ -1,2 +1,220 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+$mainColor: #4e4e50;
+$backColor: #5d5c61;
+
+* { box-sizing: border-box; }
+
+/* ======= Scrollbar ============ */
+
+::-webkit-scrollbar{
+    width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb{
+    background: #1b1b1b;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: #363636;
+}
+
+/* ========= Layout ========= */
+
+body {
+    min-height: 100vh;
+    font-family: "Lato", sans-serif;
+    background-color: $mainColor;
+}
+
+  
+main {
+    height: 100vh;
+}
+
+header{
+    min-height: 15vh;
+    background-color: $backColor;
+}
+
+.container{
+    color:#aaa;
+}
+
+.home{
+    border: 1px solid black;
+}
+
+.basic-view{
+    background-color: $backColor;
+}
+
+.tasks-view{
+    background-color: $backColor;
+}
+/* ============================ */
+ 
+.flash {
+    position:fixed;
+    top: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-s);
+
+    max-width: 100%;
+    width: max-content;
+    padding: 0 var(--space-m);
+
+    &__message {
+        font-size: var(--font-size-s);
+        color: var(--color-white);
+        padding: var(--space-xs) var(--space-m);
+        background-color: var(--color-dark);
+        animation: appear-then-fade 4s both;
+        border-radius: 999px;
+    }
+}
+
+.login-links{
+    text-decoration: none;
+    color: #fff;
+}
+
+/* ========== Sidebar ============= */
+
+.sidebar {
+    position: fixed;
+    height: 100vh;
+    width: 7vh;
+    background-color: #111;   
+    transition: 0.5s;
+    text-align: center;
+}
+
+.sidebar a {
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+.active{
+    border: none;
+    color: #f1f1f1 !important;
+}
+
+#homePageText,#homeOSPageText,#tasksPageText{
+    display: none;
+}
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    border: none;
+}
+
+.openbtn:hover {
+    text-shadow: 0 0 3px white;
+}
+
+.media-btn{
+    display: none;
+}
+
+/* ================================= */
+
+
+/*  ========= Modals ===========  */
+
+.modal-header,.modal-footer {
+    color: #fff;
+    background-color: #111;
+    border-color: #111;
+}
+
+.modal-body{
+    color: #fff;
+    background-color: #1d1d1d;
+    border-color: #111;
+}
+
+.modal-content{
+    background-color: #111;
+    border:2px solid black;
+}
+
+
+@media screen and (max-width: 700px) {
+    .media-btn{
+        display: block;
+        position: fixed;
+
+        z-index: 1;
+    }
+    .openbtn{
+        display: none;
+    }
+    .openbtn-media{
+        font-size: 2rem;
+        cursor: pointer;
+        color: white;
+        background-color: #111;
+        margin-top: 3rem;
+        border: none;
+    }
+    .sidebar {
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+    }
+    .sidebar a {
+        font-size: 18px;
+        transition: 0.5s;
+    }
+}
+
+
+dialog{
+    pointer-events: none;
+    padding: 0 0 1em 0;
+    color: #aaa;
+    border-radius: 10px;
+    border: 2px solid black;
+    opacity: 0;
+    transition: opacity 0.5s;
+    .dialog-header{
+        background-color: $backColor;
+    }
+    background-color: $mainColor;
+}
+
+dialog[open]{
+    opacity: 1;
+    pointer-events: inherit;
+}
+
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}

@@ -1,0 +1,15 @@
+%div{:id=> "#{dom_id task}"}
+
+  %p.card-title
+    %strong
+      = task.title
+
+  %p.card-text
+    = task.body
+
+  %p.card-text
+    %strong Ukończone?
+    - if task.completed
+      Tak
+    - else
+      Nie

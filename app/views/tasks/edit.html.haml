@@ -1,0 +1,13 @@
+= turbo_frame_tag "modal" do
+  %div{"data-controller"=>"modal"}
+    %h1.modal-header
+      Edytuj zadanie
+
+    %div.modal-body
+      = render "form", task: @task
+
+    %br
+
+    .modal-footer.justify-content-between
+      = button_to 'Usuń zadanie', @task, method: :delete,form: { data: { turbo_confirm: 'Na pewno chcesz usunąć te zadanie?' } }, class: 'btn btn-danger'
+      %button.btn.btn-secondary{:type=>"button", "data-bs-dismiss"=>"modal" } X

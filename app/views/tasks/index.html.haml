@@ -1,0 +1,29 @@
+%script{src: "https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js",
+  integrity: "sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D",
+  crossorigin: "anonymous",
+  async: true}
+
+.tasks-view.rounded-4.p-3.mb-3
+  .d-flex.p-1.mb-2
+    %h1 Zadania
+    .d-flex.px-3
+      =form_with(url: tasks_path, class: 'filter-container', method: :get,
+           data: { controller: "filters", filters_target: "form", turbo_frame: "filter_result"}) do |f|
+        .d-flex.flex-row
+          = f.label :completed, 'Filtruj według:',class: 'col-sm-4 mx-2 align-self-center'
+          = f.select :completed,
+            options_for_select(['Wszystkie','Ukończone','Nieukończone'], params[:completed]),
+            { include_blank: false },
+            { data: { action: "filters#submit" },class: 'form-select col-2 col-sm-1' }
+    .ms-auto
+      = button_to 'Nowe zadanie', new_task_path, method: :get, data: { turbo_frame: 'modal' }, class: "btn btn-primary"
+
+  = turbo_frame_tag "filter_result" do
+    .row{"data-masonry"=>'{"percentPosition": true }'}
+      - @tasks.each do |task|
+        .col-sm-6.col-lg-4.mb-4
+          .card.text-bg-dark.mb-3
+            .card-body.d-flex.flex-column
+              = render task
+              %div
+                = button_to 'Więcej', edit_task_path(task), method: :get, data: { turbo_frame: 'modal' }, class: "btn btn-secondary btn-sm mt-2"

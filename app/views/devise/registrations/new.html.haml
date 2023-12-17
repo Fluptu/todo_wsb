@@ -1,0 +1,23 @@
+.basic-view.rounded-4.p-3.mb-3
+  %h2 Rejestracja
+
+  .row.d-flex.justify-content-center
+    .col-md-8.col-lg-6.col-xl-5.col-xxl-4.p-2
+      = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        = f.error_notification
+
+        .form-inputs
+          = f.input :email,
+                      required: true,
+                      input_html: { autocomplete: "email" }
+          = f.input :password,
+                      label: 'Hasło',
+                      required: true,
+                      input_html: { autocomplete: "new-password" }
+          = f.input :password_confirmation,
+                      label: 'Powtórz hasło',
+                      required: true,
+                      input_html: { autocomplete: "new-password" }
+
+        .form-actions
+        = f.button :submit, 'Rejestracja', data:{turbo:false}, class: 'btn btn-secondary float-end'

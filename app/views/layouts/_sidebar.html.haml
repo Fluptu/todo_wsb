@@ -1,0 +1,12 @@
+#navBar.sidebar.d-flex.flex-column.flex-shrink-0.pt-2{"data-controller"=>"side-menu"}
+    %button.openbtn{"data-action"=>"side-menu#sideMenuToggle"}☰
+
+    = link_to root_path, class: "#{current_class?(root_path)} btn btn-default pt-3" do
+        %i.bi.bi-house-fill
+        %span#homePageText
+            Strona główna
+
+    = link_to tasks_path, class: "#{current_class?(tasks_path)} btn btn-default #{current_user ? '' : 'd-none' } " do
+        %i.bi.bi-calendar-check
+        %span#tasksPageText
+            Zadania

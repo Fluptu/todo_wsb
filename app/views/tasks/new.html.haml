@@ -1,0 +1,10 @@
+= turbo_frame_tag "modal" do
+  %div{"data-controller"=>"modal"}
+    %h1.modal-header
+      Nowe zadanie
+
+    .modal-body
+      = render "form", task: @task
+
+    .modal-footer
+      %button.btn.btn-secondary{:type=>"button", "data-bs-dismiss"=>"modal"} X
